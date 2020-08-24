@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Semi-Integrated Examples</title>
+    <meta name="generator" content="WYSIWYG Web Builder - http://www.wysiwygwebbuilder.com">
+
+    <script src="JavaScript/js/management.js"></script>
+    <script src="JavaScript/js/payments.js"></script>
+    <script src="JavaScript/js/report.js"></script>
+    <script src="JavaScript/js/tools.js"></script>
+    <script src="JavaScript/js/batch.js"></script>
+
+    <style type="text/css">
+        body {
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="paymentsSection" style="margin:0;padding:0;position:absolute;left:3%;top:25%;text-align:left;z-index:4;">
+        <font style="font-size:16px" color="#000000" face="Arial"><b>Payments</b></font>
+        <div id="payments">
+            <p>Tender Type:
+                <select id="tenderType_Payments">
+                    <option value="T00">CREDIT</option>
+                    <option value="T02">DEBIT</option>
+                    <option value="T12">CHECK</option>
+                    <option value="T04">EBT</option>
+                    <option value="T06">GIFT</option>
+                    <option value="T08">LOYALTY</option>
+                    <option value="T10">CASH</option>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="onClick(StartPayments())"> Start </button>
+            </p>
+
+            <p>Trans Type:
+                <select id="transType_Payments">
+                    <option value="00">UNKNOWN</option>
+                    <option value="01">SALE</option>                
+                    <option value="02">RETURN</option>
+                    <option value="03">AUTH</option>
+                    <option value="04">POSTAUTH</option>
+                    <option value="05">FORCED</option>
+                    <option value="06">ADJUST</option>
+                    <option value="07">WITHDRAWAL</option>
+                    <option value="08">ACTIVATE</option>
+                    <option value="09">ISSUE</option>
+                    <option value="10">ADD</option>
+                    <option value="11">CASHOUT</option>
+                    <option value="12">DEACTIVATE</option>
+                    <option value="13">REPLACE</option>
+                    <option value="14">MERGE</option>
+                    <option value="15">REPORTLOST</option>
+                    <option value="16">VOID</option>
+                    <option value="17">VOID SALE</option>
+                    <option value="18">VOID RETURN</option>
+                    <option value="19">VOID AUTH</option>
+                    <option value="20">VOID POST</option>
+                    <option value="21">VOID FORCED</option>
+                    <option value="22">VOID WITHDRAW</option>
+                    <option value="23">BALANCE</option>
+                    <option value="24">VERIFY</option>
+                    <option value="25">REACTIVATE</option>
+                    <option value="26">FORCED ISSUE</option>
+                    <option value="27">FORCED ADD</option>
+                    <option value="28">UNLOAD</option>
+                    <option value="29">RENEW</option>
+                    <option value="30">GET CONVERT DETAIL</option>
+                    <option value="31">CONVERT</option>
+                    <option value="32">TOKENIZE</option>
+                    <option value="33">INCREMENTAL AUTH</option>
+                    <option value="34">BALANCE with LOCK</option>
+                    <option value="35">REDEMPTION with UNLOCK</option>
+                    <option value="36">REWARDS</option>
+                    <option value="37">REENTER</option>
+                    <option value="99">REVERSAL</option>
+                </select>
+
+            </p>
+            <p>Amt: <input type="number" id="amount_Payments" value="100"> </p>
+            <p>Cashback Amt: <input type="number" id="cashbackAmt_Payments"> </p>
+            <p>Clerk ID: <input type="number" id="clertID_Payments"></p>
+            <!--
+            <p>Sig Save Path:
+                <input id="sigSavePath_Payments">
+                <button>Browser</button>
+            </p>
+            -->
+            <p>Zip: <input type="number" id="zip_Payments"></p>
+            <p>Tip Amt: <input type="number" id="tip_Payments"></p>
+            <p>Tax Amt: <input type="number" id="tax_Payments"></p>
+            <p>Merchant Fee: <input type="number" id="merchantFee_Payments"></p>
+            <p>Fuel Amt: <input type="number" id="fuel_Payments"></p>
+            <p>Street: <input id="street_Payments"></p>
+            <p>Street2: <input id="street2_Payments"></p>
+            <p>Surcharge Amt: <input id="surcharge_Payments"></p>
+            <p>PO Num: <input id="PO_Payments"></p>
+            <p>OrigRefNum: <input id="origRefNum_Payments"></p>
+            <p>InvNum: <input id="inv_Payments"></p>
+            <p>ERCRefNum: <input id="ercRefNum_Payments" value="1"></p>
+            <p>ERCTransID: <input id="ercTransID_Payments"></p>
+            <p>Auth Code: <input id="authCode_Payments"></p>
+            <p>Ext Data: <input id="extData_Payments"></p>
+        </div>
+    </div>
+
+    <div id="managementSection" style="margin:0;padding:0;position: absolute;;left:23%;top:25%;text-align:left;z-index:4;">
+        <font style="font-size:16px" color="#000000" face="Arial"><b>Management</b></font>
+        <P>Command:
+            <select id="command_Management" onchange="commandSelection_Management()">
+                <option value="A00" selected="selected">INIT</option>
+                <option value="A02">GETVAR</option>
+                <option value="A04">SETVAR</option>
+                <option value="A06">SHOWDIALOG</option>
+                <option value="A08">GETSIGNATURE</option>
+                <option value="A10">SHOWMESSAGE</option>
+                <option value="A12">CLEARMESSAGE</option>
+                <option value="A14">CANCEL</option>
+                <option value="A16">RESET</option>
+                <option value="A20">DOSIGNATURE</option>
+                <option value="A24">SHOWTHANKYOU</option>
+                <option value="A26">REBOOT</option>
+                <option value="A28">GETPINBLOCK</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <button onclick="onClick(manageStart())">Start</button>
+        </P>
+
+
+        <div id="getVar" style="position:absolute;top:50px;visibility:hidden">
+            <p>EDCType:
+                <select id="tender_Type_Getvar">
+                    <option value="01">CREDIT</option>
+                    <option value="02">DEBIT</option>
+                    <option value="07">CHECK</option>
+                    <option value="03">EBT</option>
+                    <option value="04">GIFT</option>
+                    <option value="05">LOYALTY</option>
+                    <option value="06">CASH</option>
+                </select>
+            </p>
+            <p>Var Name: <input id="varname_getVar"> </p>
+            <p>Var Name1: <input id="varname1_getVar"> </p>
+            <p>Var Name2: <input id="varname2_getVar"> </p>
+            <p>Var Name3: <input id="varname3_getVar"> </p>
+            <p>Var Name4: <input id="varname4_getVar"> </p>
+            <p>Ext Data: <input id="extData_getVar"> </p>
+        </div>
+        <div id="setVar" style="position:absolute;top:50px;visibility:hidden">
+            <p>EDCType:
+                <select id="tender_Type_Setvar">
+                    <option value="01">CREDIT</option>
+                    <option value="02">DEBIT</option>
+                    <option value="07">CHECK</option>
+                    <option value="03">EBT</option>
+                    <option value="04">GIFT</option>
+                    <option value="05">LOYALTY</option>
+                    <option value="06">CASH</option>
+                </select>
+            </p>
+            <p>Var Name: <input type="text" id="varname_setVar"> </p>
+            <p>Var Value: <input type="text" id="varvalue_setVar"> </p>
+            <p>Var Name1: <input type="text" id="varname1_setVar"> </p>
+            <p>Var Value1: <input type="text" id="varvalue1_setVar"> </p>
+            <p>Var Name2: <input type="text" id="varname2_setVar"> </p>
+            <p>Var Value2: <input type="text" id="varvalue2_setVar"> </p>
+            <p>Var Name3: <input type="text" id="varname3_setVar"> </p>
+            <p>Var Value3: <input type="text" id="varvalue3_setVar"> </p>
+            <p>Var Name4: <input type="text" id="varname4_setVar"> </p>
+            <p>Var Value4: <input type="text" id="varvalue4_setVar"> </p>
+            <p>Ext Data: <input id="extData_setVar"> </p>
+        </div>
+
+        <div id="showDialog" style="position:absolute;top:50px;visibility:hidden">
+            <p>Title: <input id="title_showDialog"> </p>
+            <p>Button1: <input id="button1_showDialog"> </p>
+            <p>Button2: <input id="button2_showDialog"> </p>
+            <p>Button3: <input id="button3_showDialog"> </p>
+            <p>Button4: <input id="button4_showDialog"> </p>
+            <p>Timeout: <input id="timeout_showDialog"> 0.1s </p>
+        </div>
+
+        <div id="getSignature" style="position:absolute;top:50px;visibility:hidden">
+            <p>Save Sig Path:
+                <input id="saveSigPath">
+                <button>browser
+                </button>
+            </p>
+        </div>
+
+        <div id="showMessage" style="position:absolute;top:50px;visibility:hidden">
+            <p>Title: <input id="title_showMessage"> </p>
+            <p>Display Message: <input id="displayMessage_showMessage"> </p>
+            <p>Display Message2: <input id="displayMessage2_showMessage"> </p>
+            <p>Top Down: <input id="topDown_showMessage"> </p>
+            <p>Tax Line: <input id="taxLine_showMessage"> </p>
+            <p>Total Line: <input id="totalLine_showMessage"> </p>
+            <p>Image Name: <input id="imageName_showMessage"> </p>
+            <p>Image Description: <input id="imageDescription_showMessage"> </p>
+        </div>
+
+        <div id="doSignature" style="position:absolute;top:50px;visibility:hidden">
+        </div>
+
+        <div id="showThankYou" style="position:absolute;top:50px;visibility:hidden">
+            <p>ThankYou Title <input id="title_showThankYou"> </p>
+            <p>ThankYou Message1 <input id="msg1_showThankYou"> </p>
+            <p>ThankYou Message2 <input id="msg2_showThankYou"> </p>
+            <p>ThankYou TimeOut <input type="number" value="300" id="timeout_showThankYou"> 0.1s</p>
+        </div>
+
+        <div id="getPinBlock" style="position:absolute;top:50px;visibility:hidden">
+            <p>Title <input id="title_getPinBlock"></p>
+            <p>Account Number <input id="accountNum_getPinBlock"></p>
+            <p>Encryption Type <input value="1" id="encryptionType_getPinBlock"></p>
+            <p>Key Slot <input id="keySlot_getPinBlock"></p>
+            <p>Null PIN Flag <input id="nullPinFlag_getPinBlock"></p>
+            <p>PIN Max Length <input id="pinMaxLen_getPinBlock"></p>
+            <p>PIN Min Length <input id="pinMinLen_getPinBlock"></p>
+            <p>PIN Algorithm <input id="pinAlgorithm_getPinBlock"></p>
+            <p>TimeOut <input value="300" id="timeout_getPinBlock"> 0.1s</p>
+        </div>
+    </div>
+
+
+    <div id="batchSection" style="margin:0;padding:0;position:absolute;left:43%;top:25%;text-align:left;z-index:4;">
+        <font style="font-size:16px" color="#000000" face="Arial"><b>Batch</b></font>
+        <div id="batch">
+            <p>Command:
+                <select id="command_Batch" onchange="commandSelection_Batch()">
+                    <option value="B00" selected="selected">BATCHCLOSE</option>
+                    <!--
+                    <option value="B02">FORCEBATCHCLOSE</option>
+                    -->
+                    <option value="B04">BATCHCLEAR</option>
+                    <!--
+                    <option value="B06">PURGEBATCH</option>
+                    <option value="B08">SAFUPLOAD</option>
+                    <option value="B10">DELETESAFFILE</option>
+                    <option value="B12">DELETETRANSACTION</option>
+                    -->
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="onClick(batchStart())">Start To Process
+                </button>
+            </p>
+            <div id="batchclose" style="position:absolute;top:50px">
+                <p>Timestamp: <input id="timestamp_Batchclose"></p>
+            </div>
+            <div id="batchclear" style="position:absolute;top:50px;visibility: hidden">
+                <p>EDCType:
+                    <select id="edcType_Batch">
+                        <option value="00">ALL</option>
+                        <option value="01">CREDIT</option>
+                        <option value="02">DEBIT</option>
+                        <option value="07">CHECK</option>
+                        <option value="03">EBT</option>
+                        <option value="04">GIFT</option>
+                        <option value="05">LOYALTY</option>
+                        <option value="06">CASH</option>
+                    </select>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportSection" style="margin:0;padding:0;position:absolute;left:63%;top:25%;text-align:left;z-index:4;">
+        <font style="font-size:16px" color="#000000" face="Arial"><b>Report</b></font>
+        <p>TransType:
+            <!--
+            -->
+            <select id="transType_Report" onchange="reportSelection_Report()">
+                <option value="R00">LOCALTOTALREPORT</option>
+                <option value="R02">LOCALDETAIlREPORT</option>
+                <option value="R04">LOCALFAILEDREPORT</option>
+                <option value="R06">HOSTREPORT</option>
+                <option value="R08">HISTORYREPORT</option>
+                <option value="R10">SAFSUMMARYREPORT</option>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="onClick(reportStart())">Start To Process
+            </button>
+            <!--
+                localTotalReport
+                default: visible
+            -->
+            <div id="localTotalReport" style="position:absolute;top:50px;">
+                <p>EDCType:
+                    <select id="edcTypeTotal_Report">
+                        <option value="00">ALL</option>
+                        <option value="01">CREDIT</option>
+                        <option value="02">DEBIT</option>
+                        <option value="07">CHECK</option>
+                        <option value="03">EBT</option>
+                        <option value="04">GIFT</option>
+                        <option value="05">LOYALTY</option>
+                        <option value="06">CASH</option>
+                    </select>
+                </p>
+                <p>Card Type:
+                    <select id="cardTypeTotal_Report">
+                        <option value="01">VISA</option>
+                        <option value="02">MASTERCARD</option>
+                        <option value="03">AMEX</option>
+                        <option value="04">DISCOVER</option>
+                        <option value="05">DINER CLUB</option>
+                        <option value="06">ENROUTE</option>
+                        <option value="07">JCB</option>
+                        <option value="08">REVOLUTIONCARD</option>
+                        <option value="17">INTERAC</option>
+                        <option value="18">CUP</option>
+                        <option value="99">OTHER</option>
+                    </select>
+                </p>
+            </div>
+            <!--
+                localDetailReport
+                default: hidden
+            -->
+            <div id="localDetailReport" style="position:absolute;top:50px;visibility:hidden;">
+                <p>EDCType:
+                    <select id="edcTypeDetail_Report">
+                        <option value="00">ALL</option>
+                        <option value="01">CREDIT</option>
+                        <option value="02">DEBIT</option>
+                        <option value="07">CHECK</option>
+                        <option value="03">EBT</option>
+                        <option value="04">GIFT</option>
+                        <option value="05">LOYALTY</option>
+                        <option value="06">CASH</option>
+                    </select>
+                </p>
+                <p>Card Type:
+                    <select id="cardTypeDetail_Report">
+                        <option value="01">VISA</option>
+                        <option value="02">MASTERCARD</option>
+                        <option value="03">AMEX</option>
+                        <option value="04">DISCOVER</option>
+                        <option value="05">DINER CLUB</option>
+                        <option value="06">ENROUTE</option>
+                        <option value="07">JCB</option>
+                        <option value="08">REVOLUTIONCARD</option>
+                        <option value="17">INTERAC</option>
+                        <option value="18">CUP</option>
+                        <option value="99">OTHER</option>
+                    </select>
+                </p>
+                <p>Card Type:
+                    <select id="paymentType_Report">
+                        <option value="00">UNKNOWN</option>
+                        <option value="01">SALE</option>
+                        <!-- Not supported yet!
+                        
+                        <option value="02">RETURN</option>
+                        <option value="03">AUTH</option>
+                        <option value="04">POSTAUTH</option>
+                        <option value="05">FORCED</option>
+                        <option value="06">ADJUST</option>
+                        <option value="07">WITHDRAWAL</option>
+                        <option value="08">ACTIVATE</option>
+                        <option value="09">ISSUE</option>
+                        <option value="10">ADD</option>
+                        <option value="11">CASHOUT</option>
+                        <option value="12">DEACTIVATE</option>
+                        <option value="13">REPLACE</option>
+                        <option value="14">MERGE</option>
+                        <option value="15">REPORTLOST</option>
+                        <option value="16">VOID</option>
+                        <option value="17">VOID SALE</option>
+                        <option value="18">VOID RETURN</option>
+                        <option value="19">VOID AUTH</option>
+                        <option value="20">VOID POST</option>
+                        <option value="21">VOID FORCED</option>
+                        <option value="22">VOID WITHDRAW</option>
+                        <option value="23">BALANCE</option>
+                        <option value="24">VERIFY</option>
+                        <option value="25">REACTIVATE</option>
+                        <option value="26">FORCED ISSUE</option>
+                        <option value="27">FORCED ADD</option>
+                        <option value="28">UNLOAD</option>
+                        <option value="29">RENEW</option>
+                        <option value="30">GET CONVERT DETAIL</option>
+                        <option value="31">CONVERT</option>
+                        <option value="32">TOKENIZE</option>
+                        <option value="33">INCREMENTAL AUTH</option>
+                        <option value="34">BALANCE with LOCK</option>
+                        <option value="35">REDEMPTION with UNLOCK</option>
+                        <option value="36">REWARDS</option>
+                        <option value="37">REENTER</option>
+                        <option value="99">REVERSAL</option>
+                        -->
+                    </select>
+                </p>
+                <p>Record Num <input id="recordNum_Report"></p>
+                <p>Ref Num <input id="refNum_Report"></p>
+                <p>Auth Code <input id="authCode_Report"></p>
+                <p>ECR Ref Num <input id="ecrRefNum_Report"></p>
+                <p>Ext Data <input id="extData_Report"></p>
+            </div>
+            <div id="safSummaryReport" style="position:absolute;top:50px;visibility:hidden;">
+                <p>SAF Indicator <input id="safIndicator_Report"></p>
+            </div>
+        </p>
+    </div>
+
+    <div id="wb_Image2" style="margin:0;padding:0;position:absolute;left:0px;top:44px;width:332px;height:173px;text-align:left;z-index:5;">
+        <img src="images/pax_logo.jpg" id="Image2" alt="" border="0" style="width:332px;height:173px;"></div>
+    <div id="wb_Text6" style="margin:0;padding:0;position:absolute;left:2%;top:20%;width:487px;height:24px;text-align:left;z-index:6;">
+        <font style="font-size:21px" color="#000000" face="Arial"><b>SEMI-INTEGRATED EXAMPLES</b></font>
+    </div>
+    <div id="wb_Image1" style="margin:0;padding:0;position:absolute;left:644px;top:15px;width:150px;height:153px;text-align:left;z-index:10;">
+        <img src="images/wwb_img1.jpg" id="Image1" alt="" border="0" style="width:150px;height:153px;"></div>
+    <div id="wb_Text14" style="margin:0;padding:0;position:absolute;left:720px;top:169px;width:92px;height:16px;text-align:left;z-index:11;">
+        <font style="font-size:13px" color="#000000" face="Arial">S300</font>
+    </div>
+</body>
+
+</html>

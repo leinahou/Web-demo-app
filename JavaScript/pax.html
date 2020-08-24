@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/plain; charset=UTF-8">
+<title>PAX</title>
+<!--<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>-->
+<script src="http://code.jquery.com/jquery-1.11.3.js"></script>
+<script src="js/pax.js"></script>
+
+</head>
+<body>
+IP
+<input type="text" id="ip" value="" />
+<button type="button" onclick="Do_Initialize()">Do Initialize</button>
+
+<button type="button" onclick="Do_Credit()">Do Credit</button>
+
+<script>
+
+
+function Do_Initialize()
+{
+var pax = new PAX(document.getElementById("ip").value);
+//Initialize
+    pax.Initialize('A00','1.28');
+}
+function Do_Credit()
+{
+var pax = new PAX(document.getElementById("ip").value);
+//Get Signature
+//pax.GetSignature('A08','1.28','0','90000');
+
+//Do Signature
+//pax.DoSignature('A20','1.28','0','','','200');
+
+//Do Credit
+//[02]T00[1c]1.28[1c]01[1c]100[1c][1c]1[1c][1c][1c][1c][1c]
+pax.DoCredit('T00','1.28','01','100','','1','','','','','');
+
+}
+</script>
+
+</body>
+
+
+</html>

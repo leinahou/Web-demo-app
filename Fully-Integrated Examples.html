@@ -1,0 +1,268 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Full integration examples</title>
+	<script src="JavaScript/js/tools.js"></script>
+	<script src="JavaScript/js/management.js"></script>
+	<meta name="generator" content="WYSIWYG Web Builder - http://www.wysiwygwebbuilder.com">
+	<style type="text/css">
+		body {
+			background-color: #FFFFFF;
+			color: #000000;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="managementSection" style="margin:0;padding:0;position: absolute;;left:3%;top:25%;text-align:left;z-index:4;">
+		<font style="font-size:16px" color="#000000" face="Arial"><b>Management</b></font>
+		<P>Command:
+			<select id="command_Management" onchange="commandSelection_Management()">
+				<option value="A00" selected="selected">INIT</option>
+				<option value="A02">GETVAR</option>
+				<option value="A04">SETVAR</option>
+				<option value="A06">SHOWDIALOG</option>
+				<option value="A08">GETSIGNATURE</option>
+				<option value="A10">SHOWMESSAGE</option>
+				<option value="A12">CLEARMESSAGE</option>
+				<option value="A16">RESET</option>
+				<option value="A20">DOSIGNATURE</option>
+				<option value="A24">SHOWTHANKYOU</option>
+				<option value="A26">REBOOT</option>
+				<option value="A28">GETPINBLOCK</option>
+				<option value="A48">SETEMVTLVDATA</option>
+				<option value="A46">GETEMVTLVDATA</option>
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button onclick="onClick(manageStart())">Start</button>
+		</P>
+		<div id="getVar" style="position:absolute;top:50px;visibility:hidden">
+			<p>EDCType:
+				<select id="tender_Type_Getvar">
+					<option value="01">CREDIT</option>
+					<option value="02">DEBIT</option>
+					<option value="07">CHECK</option>
+					<option value="03">EBT</option>
+					<option value="04">GIFT</option>
+					<option value="05">LOYALTY</option>
+					<option value="06">CASH</option>
+				</select>
+			</p>
+			<p>Var Name: <input id="varname_getVar"> </p>
+			<p>Var Name1: <input id="varname1_getVar"> </p>
+			<p>Var Name2: <input id="varname2_getVar"> </p>
+			<p>Var Name3: <input id="varname3_getVar"> </p>
+			<p>Var Name4: <input id="varname4_getVar"> </p>
+			<p>Ext Data: <input id="extData_getVar"> </p>
+		</div>
+		<div id="setVar" style="position:absolute;top:50px;visibility:hidden">
+			<p>EDCType:
+				<select id="tender_Type_Setvar">
+					<option value="01">CREDIT</option>
+					<option value="02">DEBIT</option>
+					<option value="07">CHECK</option>
+					<option value="03">EBT</option>
+					<option value="04">GIFT</option>
+					<option value="05">LOYALTY</option>
+					<option value="06">CASH</option>
+				</select>
+			</p>
+			<p>Var Name: <input type="text" id="varname_setVar"> </p>
+			<p>Var Value: <input type="text" id="varvalue_setVar"> </p>
+			<p>Var Name1: <input type="text" id="varname1_setVar"> </p>
+			<p>Var Value1: <input type="text" id="varvalue1_setVar"> </p>
+			<p>Var Name2: <input type="text" id="varname2_setVar"> </p>
+			<p>Var Value2: <input type="text" id="varvalue2_setVar"> </p>
+			<p>Var Name3: <input type="text" id="varname3_setVar"> </p>
+			<p>Var Value3: <input type="text" id="varvalue3_setVar"> </p>
+			<p>Var Name4: <input type="text" id="varname4_setVar"> </p>
+			<p>Var Value4: <input type="text" id="varvalue4_setVar"> </p>
+			<p>Ext Data: <input id="extData_setVar"> </p>
+		</div>
+		<div id="showDialog" style="position:absolute;top:50px;visibility:hidden">
+			<p>Title: <input id="title_showDialog"> </p>
+			<p>Button1: <input id="button1_showDialog"> </p>
+			<p>Button2: <input id="button2_showDialog"> </p>
+			<p>Button3: <input id="button3_showDialog"> </p>
+			<p>Button4: <input id="button4_showDialog"> </p>
+			<p>Timeout: <input id="timeout_showDialog"> 0.1s </p>
+		</div>
+		<div id="getSignature" style="position:absolute;top:50px;visibility:hidden">
+			<p>Save Sig Path:
+				<input id="saveSigPath">
+				<button>browser
+				</button>
+			</p>
+		</div>
+		<div id="showMessage" style="position:absolute;top:50px;visibility:hidden">
+			<p>Title: <input id="title_showMessage"> </p>
+			<p>Display Message: <input id="displayMessage_showMessage"> </p>
+			<p>Display Message2: <input id="displayMessage2_showMessage"> </p>
+			<p>Top Down: <input id="topDown_showMessage"> </p>
+			<p>Tax Line: <input id="taxLine_showMessage"> </p>
+			<p>Total Line: <input id="totalLine_showMessage"> </p>
+			<p>Image Name: <input id="imageName_showMessage"> </p>
+			<p>Image Description: <input id="imageDescription_showMessage"> </p>
+		</div>
+
+		<div id="doSignature" style="position:absolute;top:50px;visibility:hidden">
+		</div>
+
+		<div id="showThankYou" style="position:absolute;top:50px;visibility:hidden">
+			<p>ThankYou Title <input id="title_showThankYou"> </p>
+			<p>ThankYou Message1 <input id="msg1_showThankYou"> </p>
+			<p>ThankYou Message2 <input id="msg2_showThankYou"> </p>
+			<p>ThankYou TimeOut <input type="number" value="300" id="timeout_showThankYou"> 0.1s</p>
+		</div>
+
+		<div id="getPinBlock" style="position:absolute;top:50px;visibility:hidden">
+			<p>Title <input id="title_getPinBlock"></p>
+			<p>Account Number <input id="accountNum_getPinBlock"></p>
+			<p>Encryption Type <input value="1" id="encryptionType_getPinBlock"></p>
+			<p>Key Slot <input id="keySlot_getPinBlock"></p>
+			<p>Null PIN Flag <input id="nullPinFlag_getPinBlock"></p>
+			<p>PIN Max Length <input id="pinMaxLen_getPinBlock"></p>
+			<p>PIN Min Length <input id="pinMinLen_getPinBlock"></p>
+			<p>PIN Algorithm <input id="pinAlgorithm_getPinBlock"></p>
+			<p>TimeOut <input value="300" id="timeout_getPinBlock"> 0.1s</p>
+		</div>
+	</div>
+
+	<div id="fullIntegration" style="margin:0;padding:0;position:absolute;left:23%;top:25%;text-align:left;z-index:4;">
+		<font style="font-size:16px" color="#000000" face="Arial"><b>Full Integration</b></font>
+		<p>Command:
+			<select id="command_Management_Full" onchange="commandSelection_Management_Fullintegrate()">
+				<option value="A50">INPUTACCOUNTWITHEMV</option>
+				<option value="A40">AUTHORIZECARD</option>
+				<option value="A42">COMPLETEONLINEEMV</option>
+				<option value="A44">REMOVECARD</option>
+				-->
+			</select>
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onclick="onClick(manageStart_Fullintegrate())">Start To Process
+			</button>
+		</p>
+		<div id="inputAccountWithEMV" style="position:absolute;top:50px;">
+			<p>EDCType:
+				<select id="tender_Type_InputAccountWithEMV">
+					<option value="01">CREDIT</option>
+					<option value="02">DEBIT</option>
+					<option value="07">CHECK</option>
+					<option value="03">EBT</option>
+					<option value="04">GIFT</option>
+					<option value="05">LOYALTY</option>
+					<option value="06">CASH</option>
+				</select>
+			</p>
+			<p>Trans Type:
+				<select id="transType_InputAccountWithEMV">
+					<option value="00">UNKNOWN</option>
+					<option value="01" selected="selected">SALE</option>
+					<!-- Not supported yet!                    
+						<option value="02">RETURN</option>
+						<option value="03">AUTH</option>
+						<option value="04">POSTAUTH</option>
+						<option value="05">FORCED</option>
+						<option value="06">ADJUST</option>
+						<option value="07">WITHDRAWAL</option>
+						<option value="08">ACTIVATE</option>
+						<option value="09">ISSUE</option>
+						<option value="10">ADD</option>
+						<option value="11">CASHOUT</option>
+						<option value="12">DEACTIVATE</option>
+						<option value="13">REPLACE</option>
+						<option value="14">MERGE</option>
+						<option value="15">REPORTLOST</option>
+						<option value="16">VOID</option>
+						<option value="17">VOID SALE</option>
+						<option value="18">VOID RETURN</option>
+						<option value="19">VOID AUTH</option>
+						<option value="20">VOID POST</option>
+						<option value="21">VOID FORCED</option>
+						<option value="22">VOID WITHDRAW</option>
+						<option value="23">BALANCE</option>
+						<option value="24">VERIFY</option>
+						<option value="25">REACTIVATE</option>
+						<option value="26">FORCED ISSUE</option>
+						<option value="27">FORCED ADD</option>
+						<option value="28">UNLOAD</option>
+						<option value="29">RENEW</option>
+						<option value="30">GET CONVERT DETAIL</option>
+						<option value="31">CONVERT</option>
+						<option value="32">TOKENIZE</option>
+						<option value="33">INCREMENTAL AUTH</option>
+						<option value="34">BALANCE with LOCK</option>
+						<option value="35">REDEMPTION with UNLOCK</option>
+						<option value="36">REWARDS</option>
+						<option value="37">REENTER</option>
+						<option value="99">REVERSAL</option>
+					-->
+				</select>
+			</p>
+			<p>Amount: <input id="amount_InputAccountWithEMV" type="number" value="100"></p>
+			<p>CashBack Amt: <input id="cashBack_InputAccountWithEMV" type="number"></p>
+			<p>Magnetic Swipe Entry Flag: <input id="magSwipe_InputAccountWithEMV" value="1"></p>
+			<p>Manual Entry Flag: <input id="manual_InputAccountWithEMV" value="1"></p>
+			<p>Contactless Entry Flag: <input id="contactless_InputAccountWithEMV" value="1"></p>
+			<p>Contact EMV Entry Flag: <input id="contactEMV_InputAccountWithEMV" value="1"></p>
+			<p>Fallback Swipe Entry Flag: <input id="fallback_InputAccountWithEMV" value="1"></p>
+			<p>Laser Scanner Flag: <input id="laserScanner_InputAccountWithEMV"></p>
+			<p>Front Camera Flag: <input id="frontCam_InputAccountWithEMV"></p>
+			<p>Rear Scanner Flag: <input id="rearCam_InputAccountWithEMV"></p>
+			<p>Expiry Date Prompt: <input id="expDatePrompt_InputAccountWithEMV"></p>
+			<p>CVV Prompt: <input id="CVVPrompt_InputAccountWithEMV"></p>
+			<p>Zip Code Prompt: <input id="zipcodePrompt_InputAccountWithEMV"></p>
+			<p>Encryption Flag: <input id="encryption_InputAccountWithEMV" value="1"></p>
+			<p>Key Slot: <input id="keyslot_InputAccountWithEMV" value="1"></p>
+			<p>Padding Char: <input id="padding_InputAccountWithEMV"></p>
+			<p>Track Data Sentinel: <input id="trackDataSen_InputAccountWithEMV"></p>
+			<p>Min Account Length: <input id="minAccountLength_InputAccountWithEMV"></p>
+			<p>Max Account Length: <input id="maxAccountLength_InputAccountWithEMV"></p>
+			<p>Tag List: <input id="tagList_InputAccountWithEMV"></p>
+			<p>TimeOut: <input id="timeout_InputAccountWithEMV" value="300"> &nbsp;&nbsp;0.1s</p>
+			<p>Ext Data: <input id="extDate_InputAccountWithEMV"></p>
+		</div>
+		<div id="authorizeCard" style="position:absolute;top:50px;visibility:hidden;">
+			<p>Amount: <input id="amount_AuthorizeCard" type="number" value="100"></p>
+			<p>CashBack Amt: <input id="cashBack_AuthorizeCard" type="number"></p>
+			<p>Merchant Decision: <input id="merchantDecision_AuthorizeCard" value="1"></p>
+			<p>Encryption Flag: <input id="encryption_AuthorizeCard" value="1"></p>
+			<p>Key Slot: <input id="keyslot_AuthorizeCard" value="1"></p>
+			<p>PIN Min Length: <input id="pinMinLength_AuthorizeCard"></p>
+			<p>PIN Max Length: <input id="pinMaxLength_AuthorizeCard"></p>
+			<p>TimeOut: <input id="timeout_AuthorizeCard" value="300"> &nbsp;&nbsp;0.1s</p>
+			<p>Ext Data: <input id="extDate_AuthorizeCard"></p>
+		</div>
+		<div id="completeOnlineEMV" style="position:absolute;top:50px;visibility:hidden;">
+			<p>Online Authorization Result: <input id="onlineAuthResult_CompleteOnlineEMV" value="0"></p>
+			<p>Response Code: <input id="responseCode_CompleteOnlineEMV"></p>
+			<p>Authorization Code: <input id="authCode_CompleteOnlineEMV"></p>
+			<p>IssuerAuthenticationData: <input id="issuerAuthData_CompleteOnlineEMV"></p>
+			<p>Issue Script 1: <input id="issueScript1_CompleteOnlineEMV"></p>
+			<p>Issue Script 2: <input id="issueScript2_CompleteOnlineEMV"></p>
+			<p>Tag List: <input id="tagList_CompleteOnlineEMV"></p>
+			<p>Ext Data: <input id="extDate_CompleteOnlineEMV"></p>
+		</div>
+		<div id="removeCard" style="position:absolute;top:50px;visibility:hidden;">
+			<p>Message 1: <input id="message1_RemoveCard"></p>
+			<p>Issue Script 2: <input id="message2_RemoveCard"></p>
+			<p>Ext Data: <input id="extDate_RemoveCard"></p>
+		</div>
+	</div>
+
+	<div id="wb_Image2" style="margin:0;padding:0;position:absolute;left:23px;top:17px;width:332px;height:173px;text-align:left;z-index:5;">
+		<img src="images/pax_logo.jpg" id="Image2" alt="" border="0" style="width:332px;height:173px;"></div>
+	<div id="wb_Text6" style="margin:0;padding:0;position:absolute;left:55px;top:178px;width:487px;height:24px;text-align:left;z-index:6;">
+		<font style="font-size:21px" color="#000000" face="Arial"><b>FULLY-INTEGRATED EXAMPLES</b></font>
+	</div>
+	<div id="wb_Image1" style="margin:0;padding:0;position:absolute;left:644px;top:15px;width:150px;height:153px;text-align:left;z-index:15;">
+		<img src="images/wwb_img1.jpg" id="Image1" alt="" border="0" style="width:150px;height:153px;"></div>
+	<div id="wb_Text14" style="margin:0;padding:0;position:absolute;left:720px;top:169px;width:92px;height:16px;text-align:left;z-index:16;">
+		<font style="font-size:13px" color="#000000" face="Arial">S300</font>
+	</div>
+
+</body>
+
+</html>
